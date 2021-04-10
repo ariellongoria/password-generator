@@ -14,11 +14,12 @@ var getPasswordLength = function () {
 };
 
 //Takes the types of characters the user wants in their password.
+//Repeated numbers for higher chances of appearing when chosen.
 var chooseSets = function () {
     var characters = [
         { name: "lowercase", set: "abcdefghijklmnopqrstuvwxyz" },
         { name: "uppercase", set: "ABCDEFGHIJKLMNOPQRSTUVWXYZ" },
-        { name: "numbers", set: "0123456789" },
+        { name: "numbers", set: "012345678901234567890123456789" },
         { name: "special characters", set: "!\"#$%&'()*+,-./:;<=>?@[]\\^_`{|}~" },
     ];
 
@@ -50,7 +51,7 @@ var chooseSets = function () {
     if (chosenSets) {
         //Creates the confirmation message.
         var middleString = "";
-        if (chosenSetsNames.length < 1) {
+        if (chosenSetsNames.length > 1) {
             for (i = 0; i < chosenSetsNames.length; i++) {
                 if (i === chosenSetsNames.length - 1) {
                     middleString += "and " + chosenSetsNames[i];
