@@ -1,27 +1,5 @@
-// GIVEN I need a new, secure password
-// WHEN I click the button to generate a password
-// THEN I am presented with a series of prompts for password criteria
-//
-// WHEN prompted for password criteria
-// THEN I select which criteria to include in the password
 
-// WHEN prompted for the length of the password
-// THEN I choose a length of at least 8 characters and no more than 128 characters
-
-// WHEN prompted for character types to include in the password
-// THEN I choose lowercase, uppercase, numeric, and/or special characters
-
-// WHEN I answer each prompt
-// THEN my input should be validated and at least one character type should be selected
-
-// WHEN all prompts are answered
-// THEN a password is generated that matches the selected criteria
-
-// WHEN the password is generated
-// THEN the password is either displayed in an alert or written to the page
-
-// Assignment code here
-
+//Takes the length for the password from the user.
 var getPasswordLength = function () {
     var passwordLength = prompt("Choose a password length between 8 and 128 characters.");
     if (isNaN(passwordLength)) {
@@ -35,6 +13,7 @@ var getPasswordLength = function () {
     }
 };
 
+//Takes the types of characters the user wants in their password.
 var chooseSets = function () {
     var characters = [
         { name: "lowercase", set: "abcdefghijklmnopqrstuvwxyz" },
@@ -48,7 +27,7 @@ var chooseSets = function () {
     var isNumeric = confirm("Do you need numbers?");
     var isSpecialChar = confirm("Do you need special characters?");
 
-    var chosenSets = '';
+    var chosenSets = "";
     var chosenSetsNames = [];
 
     if (isLower) {
@@ -67,27 +46,38 @@ var chooseSets = function () {
         chosenSets += characters[3].set;
         chosenSetsNames.push(characters[3].name);
     }
-
-    var middleString = '';
-    for (i = 0; i < chosenSetsNames.length; i++) {
-        if (i === chosenSetsNames.length - 1) {
-            middleString += "and " + chosenSetsNames[i];
+    //Makes sure there is at least one type of character for the password.
+    if (chosenSets) {
+        //Creates the confirmation message.
+        var middleString = "";
+        if (chosenSetsNames.length < 1) {
+            for (i = 0; i < chosenSetsNames.length; i++) {
+                if (i === chosenSetsNames.length - 1) {
+                    middleString += "and " + chosenSetsNames[i];
+                } else {
+                    middleString += chosenSetsNames[i] + ", ";
+                }
+            }
         } else {
-            middleString += chosenSetsNames[i] + ", ";
+            middleString = chosenSetsNames[0];
         }
-    }
 
-    var confirmChoices = confirm("You chose " + middleString + ". Would you like to proceed?");
+        var confirmChoices = confirm("You chose " + middleString + ". Would you like to proceed?");
 
-    if (confirmChoices) {
-        return chosenSets;
+        if (confirmChoices) {
+            return chosenSets;
+        } else {
+            chooseSets();
+        }
     } else {
+        alert("Choose at least one set of characters.");
         chooseSets();
     }
 };
 
+//Generates the password with the length and sets given before.
 var generatePassword = function () {
-    var password = '';
+    var password = "";
     var passwordLength = getPasswordLength();
     var chosenSets = chooseSets();
 

@@ -5,4 +5,6 @@ Simply press generate password and choose what kinds of characters you want to u
 
 The application supports upper and lowercase letters, numbers and special characters!
 
-![]()
+[Try it out!](https://ariellongoria.github.io/password-generator/)
+
+![](./assets/images/Screenshot_1.png)
